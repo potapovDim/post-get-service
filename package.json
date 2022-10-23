@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "simple way to create node http in memory server",
   "main": "index.js",
-  "bin": {
-    "post_get_service": "./bin/post_get_service"
-  },
   "scripts": {
     "test": "mocha --timeout 5000 $(find ./specs/ -path '*.spec.*')"
   },

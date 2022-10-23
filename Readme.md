@@ -1,7 +1,7 @@
 ## Usage
 
-- Build simple fake server with routing, params, static content
-- GET, POST, PUT, DELETE, supported methods, status, bodies etc
+- Build simple in memory HTTP server
+- GET, POST are supported methods.
 
 ![npm downloads](https://img.shields.io/npm/dm/post-get-service.svg?style=flat-square)
 
@@ -16,34 +16,34 @@ npm install -SD post-get-service || npm i -g post-get-service
 base usage example
 
 ```js
-const memoryPostGetService = require('post-get-service');
+const { run_service, generate_api_requests } = require('post-get-service');
+
 const model = {
-  port: 9090,
+  port: 8081,
   api: [
     {
-      method: 'GET',
-      path: '/',
-      response: 'Hello world',
+      path: '/user',
+    },
+    {
+      path: '/item',
     },
   ],
 };
-memoryPostGetService(model).then(server => {
-  setTimeout(() => {
-    server.stop();
-  }, 25000);
-});
-// open browser
-// url 'http://localhost:9090/
+
+example();
+async function example() {
+  generate_api_requests(model, 'js', './interactions.js');
+  const service = await run_service(model);
+  const { create_data_user, get_data_user } = require('./interactions.js');
+
+  await create_data_user({ user: 1 });
+  await create_data_user({ user: 2 });
+  await create_data_user({ user: 3 });
+  await create_data_user({ user: 4 });
+
+  const user = await get_data_user();
+  console.log(user); // { user: 1 }
+
+  await service.stop();
+}
 ```
-
-mocha test example
-
-```js
-const memoryPostGetService = require('post-get-service');
-const fetch = require('node-fetch');
-const { expect } = require('chai');
-
-const model = {
-  port: 8888,
-  api: [],
-};
