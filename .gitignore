@@ -1,0 +1,12 @@
+package-lock.json
+node_modules
+.vscode
+.idea
+.DS_Store
+a.js
+b.js
+package-lock.json
+# index.html
+/lib/routes.js
+/misc/test.example.json
+playground.*
