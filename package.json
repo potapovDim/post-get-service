@@ -1,6 +1,6 @@
 {
   "name": "post-get-service",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "simple way to create node http in memory server",
   "main": "index.js",
   "scripts": {
